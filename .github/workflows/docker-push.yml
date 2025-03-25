@@ -1,6 +1,6 @@
 on:
   schedule:
-        - cron: "0 4 1 * *"
+        - cron: "0 0 * * 0"
   workflow_dispatch:
     inputs:
       tag:
@@ -60,6 +60,7 @@ jobs:
           echo "tag=${tag}" >> $GITHUB_OUTPUT
           echo "sha=${tag_sha}" >> $GITHUB_OUTPUT
           echo "short_sha=$(echo $tag_sha | cut -c1-7)" >> $GITHUB_OUTPUT
+          echo "pkg=v2fly-core" >> $GITHUB_OUTPUT
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v3
@@ -85,8 +86,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ${{ secrets.DOCKER_USERNAME }}/v2fly-core
-            ghcr.io/${{ github.repository }}
+            ${{ secrets.DOCKER_USERNAME }}/${{ steps.tag.outputs.pkg }}
+            ghcr.io/${{ github.actor }}/${{ steps.tag.outputs.pkg }}
           tags: |
             type=raw,value=latest,enable=true
             type=raw,value=${{ steps.tag.outputs.tag }},enable=true
