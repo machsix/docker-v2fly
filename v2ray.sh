@@ -61,6 +61,7 @@ unzip v2ray.zip
 install -m 755 v2ray /usr/bin/v2ray
 install -d /usr/local/share/v2ray
 install -d /etc/v2ray
+curl -L https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip.dat > geoip.dat
 install -m 644 geoip.dat geosite.dat /usr/local/share/v2ray
 install -m 644 vpoint_vmess_freedom.json /etc/v2ray/config.json
 
