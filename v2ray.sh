@@ -57,10 +57,12 @@ fi
 
 # Prepare
 echo "Prepare to use"
-unzip v2ray.zip && chmod +x v2ray
-mv v2ray /usr/bin/
-mv geosite.dat geoip.dat /usr/local/share/v2ray/
-mv config.json /etc/v2ray/config.json
+unzip v2ray.zip
+install -m 755 v2ray /usr/bin/v2ray
+install -d /usr/local/share/v2ray
+install -d /etc/v2ray
+install -m 644 geoip.dat geosite.dat /usr/local/share/v2ray
+install -m 644 vpoint_vmess_freedom.json /etc/v2ray/config.json
 
 # Clean
 rm -rf ${PWD}/*

@@ -18,5 +18,10 @@ RUN set -ex \
     && chmod +x /usr/bin/v2ray-tproxy \
     && "${WORKDIR}"/v2ray.sh "${TARGETPLATFORM}" "${TAG}"
 
+ENV V2RAY_LOCATION_ASSET="/usr/local/share/v2ray"
+ENV V2RAY_LOCATION_CONFIG="/etc/v2ray"
 
-ENTRYPOINT ["/usr/bin/v2ray"]
+RUN echo "#!/bin/sh" > /entrypoint.sh \
+    && echo "exec /usr/bin/v2ray run -config /etc/v2ray/config.json" >> /entrypoint.sh \
+    && chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
