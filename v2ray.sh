@@ -55,15 +55,17 @@ else
     echo " Check have not passed yet " && exit 1
 fi
 
-# Prepare
+# Install
+V2RAY_LOCATION_ASSETS="${V2RAY_LOCATION_ASSETS:-/usr/local/share/v2ray}"
+V2RAY_LOCATION_CONFIG="${V2RAY_LOCATION_CONFIG:-/etc/v2ray}"
 echo "Prepare to use"
 unzip v2ray.zip
 install -m 755 v2ray /usr/bin/v2ray
-install -d /usr/local/share/v2ray
-install -d /etc/v2ray
-curl -L https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip.dat > geoip.dat
-install -m 644 geoip.dat geosite.dat /usr/local/share/v2ray
-install -m 644 vpoint_vmess_freedom.json /etc/v2ray/config.json
+install -d "${V2RAY_LOCATION_ASSETS}"
+install -d "${V2RAY_LOCATION_CONFIG}"
+curl -L https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip.dat  -o "${V2RAY_LOCATION_ASSETS}/geoip.dat"
+install -m 644 geoip.dat geosite.dat "${V2RAY_LOCATION_ASSETS}/geosite.dat"
+install -m 644 vpoint_vmess_freedom.json "${V2RAY_LOCATION_CONFIG}/config.json"
 
 # Clean
 rm -rf ${PWD}/*
