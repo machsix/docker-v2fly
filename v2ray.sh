@@ -63,8 +63,8 @@ unzip v2ray.zip
 install -m 755 v2ray /usr/bin/v2ray
 install -d "${V2RAY_LOCATION_ASSETS}"
 install -d "${V2RAY_LOCATION_CONFIG}"
-curl -L https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip.dat  -o "${V2RAY_LOCATION_ASSETS}/geoip.dat"
-install -m 644 geoip.dat geosite.dat "${V2RAY_LOCATION_ASSETS}/geosite.dat"
+curl -L https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip.dat  -o geoip.dat
+install -m 644 geoip.dat geosite.dat "${V2RAY_LOCATION_ASSETS}"
 install -m 644 vpoint_vmess_freedom.json "${V2RAY_LOCATION_CONFIG}/config.json"
 
 # Clean
